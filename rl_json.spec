@@ -4,11 +4,12 @@
 
 Name:          rl_json
 Summary:       Extends Tcl with a json value type and a command to manipulate json values directly
-Version:       0.9.9
+Version:       0.9.11
 Release:       1
 License:       TCL
 Group:         Development/Libraries/Tcl
-Source:        rl_json-0.9.9.tar.gz
+Source:        rl_json-0.9.11.tar.gz
+Patch0:        noman.patch
 URL:           https://github.com/RubyLane/rl_json
 BuildRequires: autoconf
 BuildRequires: make
@@ -25,6 +26,7 @@ representation is a valid dictionary. It is similar to dict in performance.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0
 
 %build
 %{__autoconf}

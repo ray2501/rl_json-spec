@@ -1,8 +1,8 @@
 #!/usr/bin/tclsh
 
 set arch "x86_64"
-set base "rl_json-0.9.9"
-set fileurl "https://github.com/RubyLane/rl_json/archive/0.9.9.tar.gz"
+set base "rl_json-0.9.11"
+set fileurl "https://github.com/RubyLane/rl_json/archive/0.9.11.tar.gz"
 
 set var [list wget $fileurl -O $base.tar.gz]
 exec >@stdout 2>@stderr {*}$var
@@ -13,6 +13,7 @@ if {[file exists build]} {
 
 file mkdir build/BUILD build/RPMS build/SOURCES build/SPECS build/SRPMS
 file copy -force $base.tar.gz build/SOURCES
+file copy -force noman.patch build/SOURCES
 
 set buildit [list rpmbuild --target $arch --define "_topdir [pwd]/build" -bb rl_json.spec]
 exec >@stdout 2>@stderr {*}$buildit
