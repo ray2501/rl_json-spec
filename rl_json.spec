@@ -4,11 +4,11 @@
 
 Name:          rl_json
 Summary:       Extends Tcl with a json value type and a command to manipulate json values directly
-Version:       0.9.13
+Version:       0.9.14
 Release:       1
 License:       TCL
 Group:         Development/Libraries/Tcl
-Source:        rl_json-0.9.13.tar.gz
+Source:        rl_json-0.9.14.tar.gz
 Patch0:        noman.patch
 URL:           https://github.com/RubyLane/rl_json
 BuildRequires: autoconf

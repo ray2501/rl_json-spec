@@ -1,8 +1,8 @@
 #!/usr/bin/tclsh
 
 set arch "x86_64"
-set base "rl_json-0.9.13"
-set fileurl "https://github.com/RubyLane/rl_json/archive/0.9.13.tar.gz"
+set base "rl_json-0.9.14"
+set fileurl "https://github.com/RubyLane/rl_json/archive/0.9.14.tar.gz"
 
 set var [list wget $fileurl -O $base.tar.gz]
 exec >@stdout 2>@stderr {*}$var
