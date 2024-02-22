@@ -1,0 +1,21 @@
+--- Makefile.in.orig	2023-10-15 22:59:58.515500995 +0800
++++ Makefile.in	2023-10-15 23:00:22.167544452 +0800
+@@ -237,12 +237,12 @@
+ #========================================================================
+ 
+ install-doc: doc
+-	@$(INSTALL_DATA_DIR) $(DESTDIR)$(mandir)/mann
+-	@echo "Installing documentation in $(DESTDIR)$(mandir)"
+-	@list='$(srcdir)/doc/*.n'; for i in $$list; do \
+-	    echo "Installing $$i"; \
+-	    $(INSTALL_DATA) $$i $(DESTDIR)$(mandir)/mann ; \
+-	done
++	#@$(INSTALL_DATA_DIR) $(DESTDIR)$(mandir)/mann
++	#@echo "Installing documentation in $(DESTDIR)$(mandir)"
++	#@list='$(srcdir)/doc/*.n'; for i in $$list; do \
++	#    echo "Installing $$i"; \
++	#    $(INSTALL_DATA) $$i $(DESTDIR)$(mandir)/mann ; \
++	#done
+ 
+ test: binaries libraries
+ 	$(TCLSH) `@CYGPATH@ $(srcdir)/tests/all.tcl` $(TESTFLAGS) -load $(PACKAGE_LOAD)
