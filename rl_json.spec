@@ -4,7 +4,7 @@
 
 Name:          rl_json
 Summary:       Extends Tcl with a json value type to manipulate json objects
-Version:       0.15.1
+Version:       0.15.2
 Release:       1
 License:       TCL
 Group:         Development/Libraries/Tcl

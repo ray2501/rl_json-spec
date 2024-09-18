@@ -1,14 +1,14 @@
 #!/usr/bin/tclsh
 
 set arch "x86_64"
-set base "rl_json-0.15.1"
+set base "rl_json-0.15.2"
 
 set var [list git clone --recurse-submodules https://github.com/RubyLane/rl_json.git $base]
 exec >@stdout 2>@stderr {*}$var
 
 cd $base
 
-set var2 [list git checkout 520d984035b3ce066f8d307fdf7094a6721b9958]
+set var2 [list git checkout eb5aa3bb211e528df21258aa7e983a38cd197ff5]
 exec >@stdout 2>@stderr {*}$var2
 
 set var2 [list git reset --hard]
