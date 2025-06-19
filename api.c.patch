@@ -1,0 +1,16 @@
+--- generic/api.c.old	2025-06-19 20:24:54.110210290 +0800
++++ generic/api.c	2025-06-19 20:25:22.698511147 +0800
+@@ -31,10 +31,10 @@
+ int JSON_NewJBooleanObj(Tcl_Interp* interp, Tcl_Obj* boolean, Tcl_Obj** new) //{{{
+ {
+ 	struct interp_cx*	l = Tcl_GetAssocData(interp, "rl_json", NULL);
+-	int					bool;
++	int					boolflag;
+ 
+-	TEST_OK(Tcl_GetBooleanFromObj(interp, boolean, &bool));
+-	replace_tclobj(new, bool ? l->json_true : l->json_false);
++	TEST_OK(Tcl_GetBooleanFromObj(interp, boolean, &boolflag));
++	replace_tclobj(new, boolflag ? l->json_true : l->json_false);
+ 
+ 	return TCL_OK;
+ }
