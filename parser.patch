@@ -1,0 +1,75 @@
+--- generic/parser.c.orig	2026-01-15 11:55:51.826741623 +0800
++++ generic/parser.c	2026-01-15 11:56:54.825836131 +0800
+@@ -22,7 +22,11 @@
+ 
+ 	snprintf(char_ofs_buf, 20, "%ld", details->char_ofs);
+ 
+-	Tcl_SetObjResult(interp, Tcl_ObjPrintf("Error parsing JSON value: %s at offset %ld", details->errmsg, details->char_ofs));
++	#if TCL_MAJOR_VERSION == 8
++	Tcl_SetObjResult(interp, Tcl_ObjPrintf("Error parsing JSON value: %s at offset %ld", details->errmsg, (unsigned long)details->char_ofs));
++	#else
++	Tcl_SetObjResult(interp, Tcl_ObjPrintf("Error parsing JSON value: %s at offset %llu", details->errmsg, (unsigned long long)details->char_ofs));
++	#endif
+ 	Tcl_SetErrorCode(interp, "RL", "JSON", "PARSE", details->errmsg, details->doc, char_ofs_buf, NULL);
+ }
+ 
+--- generic/rl_jsonInt.h.orig	2026-01-15 11:58:38.482991652 +0800
++++ generic/rl_jsonInt.h	2026-01-15 11:58:49.745430129 +0800
+@@ -18,8 +18,8 @@
+ #endif
+ #if CBOR
+ #include <endian.h>
+-#endif
+ #include <tommath.h>
++#endif
+ #include "tip445.h"
+ #include "names.h"
+ 
+--- teabase/tip445.h.orig	2026-01-15 11:59:45.859092765 +0800
++++ teabase/tip445.h	2026-01-15 12:00:01.089115626 +0800
+@@ -49,24 +49,24 @@
+ #	define Tcl_HasStringRep(obj)	((obj)->bytes != NULL)
+ #endif
+ 
++/*
++## error: 'Tcl_InitStringRep' defined but not used [-Werror=unused-function]
+ #ifndef Tcl_InitStringRep
+ static char* Tcl_InitStringRep(Tcl_Obj* objPtr, const char* bytes, unsigned numBytes)
+ {
+ 	assert(objPtr->bytes == NULL || bytes == NULL);
+-
+ 	if (numBytes > INT_MAX) {
+ 		Tcl_Panic("max size of a Tcl value (%d bytes) exceeded", INT_MAX);
+ 	}
+-
+-	/* Allocate */
++	// Allocate
+ 	if (objPtr->bytes == NULL) {
+-		/* Allocate only as empty - extend later if bytes copied */
++                // Allocate only as empty - extend later if bytes copied
+ 		objPtr->length = 0;
+ 		if (numBytes) {
+ 			objPtr->bytes = (char*)attemptckalloc(numBytes + 1);
+ 			if (objPtr->bytes == NULL) return NULL;
+ 			if (bytes) {
+-				/* Copy */
++                                // Copy
+ 				memcpy(objPtr->bytes, bytes, numBytes);
+ 				objPtr->length = (int)numBytes;
+ 			}
+@@ -79,13 +79,11 @@
+ 		objPtr->bytes = (char*)ckrealloc(objPtr->bytes, numBytes + 1);
+ 		objPtr->length = (int)numBytes;
+ 	}
+-
+-	/* Terminate */
++	// Terminate
+ 	objPtr->bytes[objPtr->length] = '\0';
+-
+ 	return objPtr->bytes;
+ }
+-#endif
++#endif*/
+ 
+ #endif	// TIP445_SHIM
+ 

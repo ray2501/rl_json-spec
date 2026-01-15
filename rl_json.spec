@@ -4,18 +4,18 @@
 
 Name:          rl_json
 Summary:       Extends Tcl with a json value type to manipulate json objects
-Version:       0.15.3
+Version:       0.15.7
 Release:       1
 License:       TCL
 Group:         Development/Libraries/Tcl
 Source:        rl_json-%{version}.tar.gz
 Patch0:        noman.patch
-Patch1:        api.c.patch
+Patch1:        parser.patch
 URL:           https://github.com/RubyLane/rl_json
 BuildRequires: autoconf
 BuildRequires: make
-BuildRequires: tcl-devel >= 8.5
-Requires:      tcl >= 8.5
+BuildRequires: tcl-devel >= 8.6
+Requires:      tcl >= 8.6
 BuildRoot:     %{buildroot}
 
 %description

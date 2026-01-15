@@ -1,14 +1,14 @@
 #!/usr/bin/tclsh
 
 set arch "x86_64"
-set base "rl_json-0.15.3"
+set base "rl_json-0.15.7"
 
 set var [list git clone --recurse-submodules https://github.com/RubyLane/rl_json.git $base]
 exec >@stdout 2>@stderr {*}$var
 
 cd $base
 
-set var2 [list git checkout eb5aa3bb211e528df21258aa7e983a38cd197ff5]
+set var2 [list git checkout 1fec56d637ca626356dc65bedd5a5cdcd89baf51]
 exec >@stdout 2>@stderr {*}$var2
 
 set var2 [list git reset --hard]
@@ -29,7 +29,7 @@ if {[file exists build]} {
 file mkdir build/BUILD build/RPMS build/SOURCES build/SPECS build/SRPMS
 file copy -force $base.tar.gz build/SOURCES
 file copy -force noman.patch build/SOURCES
-file copy -force api.c.patch build/SOURCES
+file copy -force parser.patch build/SOURCES
 
 set buildit [list rpmbuild --target $arch --define "_topdir [pwd]/build" -bb rl_json.spec]
 exec >@stdout 2>@stderr {*}$buildit
